@@ -1,0 +1,11 @@
+comandos git:
+ 
+ git add --all
+ git commit -m "modificacion del archivo x"
+ git push [credenciales]
+
+ ------------------------
+
+ con repositorios compartidos:
+
+  git pull 
