@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Objetos</title>
+	<script type="text/javascript">
+		
+		function Profesor(nombre){
+			this.nombre=nombre;
+		}
+		function TFG(nombre, tribunal1,tribunal2,tribunal3){
+			this.nombre=nombre;
+			this.tribunal=[tribunal1,tribunal2,tribunal3];
+		}
+		
+		var profesores = [new Profesor("caca"),new Profesor("culo"),new Profesor("pedo"),new Profesor("piss")]
+		
+		var tfgs = [new TFG("1",profesores[0],profesores[1],profesores[2]),new TFG("2",null,null,null),new TFG("3",null,null,null),new TFG("4",null,null,null)]			
+		
+		
+		
+		initializeTFGs();
+		//assignTFG(tfgs[1])
+		
+		function initializeTFGs(){
+			for(i=0;i<tfgs.length;i++){
+				assignTFG(tfgs[i]);
+                infoTFG(tfgs[i]);
+			}
+		}
+		
+		function assignTFG(tfg){
+		
+			var aleatorio;
+            var i=0;
+			
+			while(!is_assigned(tfg))
+			{
+				do{
+					aleatorio = Math.floor(Math.random()*profesores.length);	
+				}while(is_tribunal(profesores[aleatorio],tfg));
+				
+                i=0;
+                while(i<tfg.tribunal.length && tfg.tribunal[i] !== null){                
+                    i++;
+                }
+                
+                if(tfg.tribunal[i] === null ){		
+						tfg.tribunal[i]=profesores[aleatorio];
+                }
+                
+			}			
+			
+		}
+				
+		function is_assigned(tfg){
+			for(j=0;j<tfg.tribunal.length;j++){
+				if(tfg.tribunal[j] === null){
+					return false;
+				}				
+			}
+			return true;			
+		}
+		
+		function is_tribunal(profesor,tfg){
+			for(j=0;j<tfg.tribunal.length;j++){
+				if(tfg.tribunal[j] !== null ){
+					if(	tfg.tribunal[j].nombre == profesor.nombre){
+						return true;
+					}				
+				}
+			}
+			return false;			
+		}
+		
+		function infoTFG(tfg){
+				for(j=0;j<tfg.tribunal.length;j++){
+					if(tfg.tribunal[j] !== null ){		
+						console.log(tfg.tribunal[j].nombre);
+					}
+					else{
+						console.log("nulo");
+					}
+				}
+			
+		}
+		
+	</script>
+</head>
+<body>
+</body>
+</html>
